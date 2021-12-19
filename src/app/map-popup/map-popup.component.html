@@ -1,0 +1,22 @@
+<div class="container-fluid">
+    <p>{{coordinates}}</p>
+    <div *ngIf="positionData">
+      <div *ngIf="positionData.length == 1">
+        <h4>{{positionData[0].name}}, {{positionData[0].state}}</h4>
+        <h5>{{positionData[0].country}}</h5>
+      </div>
+      <div>
+        <h5 *ngIf="pollutionData">Air Quality: 
+          <span *ngIf="pollutionData.list[0].main.aqi == 1">Very Good</span>
+          <span *ngIf="pollutionData.list[0].main.aqi == 2">Good</span>
+          <span *ngIf="pollutionData.list[0].main.aqi == 3">Moderate</span>
+          <span *ngIf="pollutionData.list[0].main.aqi == 4">Bad</span>
+          <span *ngIf="pollutionData.list[0].main.aqi == 5">Very Bad</span>
+        </h5>
+      </div>
+    </div>
+    <!-- <p *ngIf="pollutionData">pollution</p> -->
+    <div *ngIf="!positionData && !pollutionData" class="spinner-border text-dark" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+</div>

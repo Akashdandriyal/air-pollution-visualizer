@@ -1,0 +1,32 @@
+.map-container {
+    /* position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; */
+    height: 100vh;
+    width: 100vw;
+}
+  
+.map-frame {
+  height: 100%;
+}
+
+#map {
+  height: 100%;
+}
+
+.map-buttons {
+  /* position: absolute;
+  left: 10px;
+  bottom: 20px;
+  z-index: 9999; */
+}
+
+.dark-mode {
+  color: white;
+}
+
+.light-mode {
+  color: black;
+}

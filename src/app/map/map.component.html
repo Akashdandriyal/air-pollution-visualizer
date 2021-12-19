@@ -1,0 +1,26 @@
+<div class="map-container">
+    <h1  style="position: absolute; top: 5px; left: 50px; z-index: 9999;">AirPollutionVisualizer</h1>
+    <div class="map-frame">
+        <div id="map">
+
+        </div>
+    </div>
+    <!-- <h1 class="leaflet-top leaflet-left">Yooo</h1> -->
+    <div class="map-buttons leaflet-control-container">
+        <!-- <input type="checkbox" name="" id="" (click)="changeMode()"> -->
+        <div class="leaflet-bottom leaflet-left">
+            <div class="leaflet-control-zoom leaflet-bar leaflet-control">
+                <a role="button" class="leaflet-control-zoom-in" (click)="changeMode()">
+                    <span title="Light Mode" *ngIf="darkmode">☀️</span>
+                    <span title="Dark Mode" *ngIf="!darkmode">🌙</span>
+                    <!-- <i class="fas fa-sun" *ngIf="darkmode"></i>
+                    <i class="fas fa-moon" *ngIf="!darkmode"></i> -->
+                </a>
+                <a role="button" class="leaflet-control-zoom-in" title="Detect Location" (click)="getLocation()">📍</a>
+                <!-- <input class="form-check-input leaflet-control-zoom-in" type="checkbox" id="flexSwitchCheckDefault" title="Toggle Mode" (click)="changeMode()"> -->
+            </div>
+        </div>
+        
+    </div>
+    <i class="fas fa-sun" *ngIf="darkmode"></i>
+</div>
