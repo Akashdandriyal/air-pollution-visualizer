@@ -1,0 +1,34 @@
+.pollution-component {
+    background-color: darkgrey;
+    color: white;
+    text-align: center;
+}
+
+.pollution-component > h4 {
+    margin: 5px 0 0 0;
+}
+
+.pollution-component:hover {
+    background-color: rgb(109, 108, 108);
+    transition-duration: 1.5s;
+}
+
+.very-good {
+    color: #02a114;
+}
+
+.good {
+    color: #00ff1e;
+}
+
+.moderate {
+    color: #fffb00;
+}
+
+.bad {
+    color: #ff8c00;
+}
+
+.very-bad {
+    color: #e00000;
+}

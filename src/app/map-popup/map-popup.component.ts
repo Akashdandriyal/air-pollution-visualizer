@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MapPopupService } from '../services/map-popup/map-popup.service';
+import { MapService } from '../services/map/map.service';
 
 @Component({
   selector: 'app-map-popup',
@@ -12,7 +12,8 @@ export class MapPopupComponent implements OnInit {
   pollutionData: any;
   positionData: any;
   graphData: any;
-  constructor(private _mapPopupService: MapPopupService) { }
+  darkmode: boolean = false;
+  constructor(private _mapPopupService: MapService) { }
 
   ngOnInit(): void {
     this._mapPopupService.getPosition(this.coordinates.lat, this.coordinates.lng).subscribe(
@@ -27,7 +28,6 @@ export class MapPopupComponent implements OnInit {
       () => {
         this.showData(this.pollutionData)
         this.graphData = Object.keys(this.pollutionData.list[0].components);
-        let newData: any= []
         this.graphData = this.graphData.map((key: any) => {
           return {
             name: key,
@@ -38,14 +38,17 @@ export class MapPopupComponent implements OnInit {
       }
     );
     
+    let mode = localStorage.getItem('mode');
+    if(mode == 'true') {
+      this.darkmode = true;
+    } 
+    else if(mode == 'false') {
+      this.darkmode = false;
+    }
   }
 
   showData(data: any) {
     console.log(data);
   }
-
-  // getColor(data: any): any {
-  //   if()
-  // }
 
 }

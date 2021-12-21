@@ -6,7 +6,7 @@ import { environment } from '../../../environments/environment'
 @Injectable({
   providedIn: 'root'
 })
-export class MapPopupService {
+export class MapService {
 
   constructor(private http: HttpClient) { }
 
@@ -17,7 +17,13 @@ export class MapPopupService {
   }
 
   getPosition(lat: string, lng: string): Observable<Object> {
-    let data = this.http.get(`https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lng}&limit=1&appid=${environment.pollutionApi}`)
+    let data: any = this.http.get(`https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lng}&limit=1&appid=${environment.pollutionApi}`)
+    console.log(data);
+    return data;
+  }
+
+  getForcastData(lat: string, lng: string): Observable<Object> {
+    let data: any = this.http.get(`http://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=${lat}&lon=${lng}&limit=1&appid=${environment.pollutionApi}`)
     console.log(data);
     return data;
   }
