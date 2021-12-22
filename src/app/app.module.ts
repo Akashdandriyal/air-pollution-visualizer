@@ -7,7 +7,6 @@ import { MapComponent } from './map/map.component';
 import { MapService } from './services/map/map.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MapPopupComponent } from './map-popup/map-popup.component';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DetailedDataComponent } from './detailed-data/detailed-data.component';
 
@@ -22,7 +21,6 @@ import { DetailedDataComponent } from './detailed-data/detailed-data.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgxChartsModule,
     BrowserAnimationsModule
   ],
   providers: [
