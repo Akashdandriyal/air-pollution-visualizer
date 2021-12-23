@@ -16,11 +16,11 @@
     </div>
   </div>
   <div *ngIf="pollutionData" class="row pollution-component-container">
-    <div *ngFor="let component of graphData" class="col-sm-4 pollution-component" title="{{component.name}}: {{component.value}}">
+    <div *ngFor="let component of graphData" class="pollution-component" [ngClass]="darkmode ? 'dark-border' : 'light-border'" title="{{component.name}}: {{component.value}}">
       <h4>{{component.value}}</h4>
       <p><strong>{{component.name}}</strong></p>
     </div>
-    <div class="col-sm-4 pollution-component">
+    <div class="pollution-component navigation-button" [ngClass]="darkmode ? 'dark-border' : 'light-border'" (click)="detailedData()">
       <p><strong>Detailed Info</strong></p>
       <p><strong>&#8594;</strong></p>
     </div>

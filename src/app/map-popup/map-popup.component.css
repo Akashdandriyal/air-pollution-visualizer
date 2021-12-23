@@ -2,6 +2,8 @@
     background-color: darkgrey;
     color: white;
     text-align: center;
+    flex: 0 0 auto;
+    width: 33.33333333%;
 }
 
 .pollution-component > h4 {
@@ -31,4 +33,16 @@
 
 .very-bad {
     color: #e00000;
+}
+
+.dark-border {
+    border: 1px solid black;
+}
+
+.light-border {
+    border: 1px solid white;
+}
+
+.navigation-button {
+    cursor: pointer;
 }

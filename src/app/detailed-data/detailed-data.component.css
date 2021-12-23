@@ -1,8 +1,68 @@
-.detailed-data-container {
-    height: 100vh;
-    width: 100vw;
+header, footer {
+	background-color: rgb(44, 44, 44);
+	color: white;
+	padding: 10px
 }
 
-.detailed-data-container-row {
-    height: 100%;
+.loading {
+	height: 100vh;
+}
+
+.pollution-component {
+    background-color: darkgrey;
+    color: white;
+    text-align: center;
+}
+
+.pollution-component > h4 {
+    margin: 5px 0 0 0;
+}
+
+.pollution-component:hover {
+    background-color: rgb(109, 108, 108);
+    transition-duration: 1.5s;
+}
+
+.very-good {
+    color: #02a114;
+}
+
+.good {
+    color: #00ff1e;
+}
+
+.moderate {
+    color: #fffb00;
+}
+
+.bad {
+    color: #ff8c00;
+}
+
+.very-bad {
+    color: #e00000;
+}
+
+.dark-border {
+    border: 1px solid black;
+}
+
+.light-border {
+    border: 1px solid white;
+}
+
+footer {
+	text-align: center;
+}
+
+
+@media (max-width: 768px) {
+	header {
+		text-align: center;
+	}
+
+	.pollution-component {
+		flex: 0 0 auto;
+    	width: 50%;
+	}
 }

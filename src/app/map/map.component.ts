@@ -118,6 +118,7 @@ export class MapComponent implements AfterViewInit, OnInit {
   changePopupColor(): void {
     let popupTop = document.getElementsByClassName('leaflet-popup-content-wrapper');
     let popupBottom = document.getElementsByClassName('leaflet-popup-tip');
+    let popupPollutionComponent = document.getElementsByClassName('pollution-component');
     for (let i = 0; i < popupTop.length; i++) {
       let elementTop = popupTop[i] as HTMLElement;
       let elementBottom = popupBottom[i] as HTMLElement;
@@ -132,6 +133,15 @@ export class MapComponent implements AfterViewInit, OnInit {
         elementTop.style.backgroundColor = 'White';
         elementTop.style.color = 'Black';
         elementBottom.style.backgroundColor = 'White';
+      }
+    }
+    for(let i = 0; i < popupPollutionComponent.length; i++) {
+      let pollutionComponent = popupPollutionComponent[i] as HTMLElement;
+      if(this.darkmode) {
+        pollutionComponent.style.border = '1px solid black';
+      }
+      else {
+        pollutionComponent.style.border = '1px solid white';
       }
     }
   }

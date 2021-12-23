@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MapService } from '../services/map/map.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-map-popup',
@@ -13,7 +14,7 @@ export class MapPopupComponent implements OnInit {
   positionData: any;
   graphData: any;
   darkmode: boolean = false;
-  constructor(private _mapPopupService: MapService) { }
+  constructor(private _mapPopupService: MapService, private router: Router) { }
 
   ngOnInit(): void {
     this._mapPopupService.getPosition(this.coordinates.lat, this.coordinates.lng).subscribe(
@@ -49,6 +50,12 @@ export class MapPopupComponent implements OnInit {
 
   showData(data: any) {
     console.log(data);
+  }
+
+  detailedData() {
+    localStorage.setItem('lat', this.coordinates.lat);
+    localStorage.setItem('lng', this.coordinates.lng);
+    this.router.navigate(['detailedData']);
   }
 
 }

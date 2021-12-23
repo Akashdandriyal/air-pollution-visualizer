@@ -1,13 +1,44 @@
-<div class="container-fluid detailed-data-container">
-    <div class="row detailed-data-container-row">
-        <div class="col-lg-2">
-
-        </div>
-        <div class="col-lg-5">
-            
-        </div>
-        <div class="col-lg-5">
-            
-        </div>
-    </div>
+<header class="container-fluid">
+	<h1>Air Pollution Visualizer</h1>
+</header>
+<div class="container-fluid detailed-data-container" *ngIf="currentPollutionData && forcastPollutionData && positionData">
+	<div class="row detailed-data-container-row">
+		<div class="col-lg-6">
+			<div *ngIf="positionData">
+				<div *ngIf="positionData.length == 1">
+					<h4>{{positionData[0].name}}, {{positionData[0].state}}</h4>
+					<h5>{{positionData[0].country}}</h5>
+				</div>
+				<div>
+					<h5 *ngIf="currentPollutionData">Air Quality: 
+						<span *ngIf="currentPollutionData.list[0].main.aqi == 1" class="very-good">Very Good</span>
+						<span *ngIf="currentPollutionData.list[0].main.aqi == 2" class="good">Good</span>
+						<span *ngIf="currentPollutionData.list[0].main.aqi == 3" class="moderate">Moderate</span>
+						<span *ngIf="currentPollutionData.list[0].main.aqi == 4" class="bad">Bad</span>
+						<span *ngIf="currentPollutionData.list[0].main.aqi == 5" class="very-bad">Very Bad</span>
+					</h5>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-6">
+			<div class="row" *ngIf="currentData">
+				<div class="col-lg-3 pollution-component" style="border: 1px solid white;" *ngFor="let component of currentData">
+					<h4>{{component.value}}</h4>
+					<p>{{component.name}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<h5>Graphs</h5>
+	<div class="row" style="border: 1px solid black;">
+		<div class="col-lg-3"  *ngFor="let graphData of forcastPollutionGraph">
+			<app-pollution-graph [graphData]="graphData" ></app-pollution-graph>
+		</div>
+	</div>
 </div>
+<div class="container-fluid loading" *ngIf="!currentPollutionData && !forcastPollutionData && !positionData">
+	<h1>Loading</h1>
+</div>
+<footer class="container-fluid">
+	<p><strong>designed & developed by akashdandriyal</strong></p>
+</footer>
