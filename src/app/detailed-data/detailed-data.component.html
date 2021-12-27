@@ -1,7 +1,11 @@
 <header class="container-fluid">
 	<h1>Air Pollution Visualizer</h1>
+	<a role="button" class="" (click)="changeMode()">
+		<span title="Light Mode" *ngIf="darkmode">☀️</span>
+		<span title="Dark Mode" *ngIf="!darkmode">🌙</span>
+	</a>
 </header>
-<div class="container-fluid detailed-data-container" *ngIf="currentPollutionData && forcastPollutionData && positionData">
+<div class="container-fluid detailed-data-container" [ngClass]="[darkmode ? 'dark-mode' : '']" *ngIf="currentPollutionData && forcastPollutionData && positionData">
 	<div class="row detailed-data-container-row">
 		<div class="col-lg-6">
 			<div *ngIf="positionData">
@@ -22,23 +26,40 @@
 		</div>
 		<div class="col-lg-6">
 			<div class="row" *ngIf="currentData">
-				<div class="col-lg-3 pollution-component" style="border: 1px solid white;" *ngFor="let component of currentData">
+				<div class="col-lg-3 pollution-component" [ngClass]="[darkmode ? 'dark-border' : 'light-border']" *ngFor="let component of currentData">
 					<h4>{{component.value}}</h4>
 					<p>{{component.name}}</p>
 				</div>
 			</div>
 		</div>
 	</div>
-	<h5>Graphs</h5>
-	<div class="row" style="border: 1px solid black;">
-		<div class="col-lg-3"  *ngFor="let graphData of forcastPollutionGraph">
-			<app-pollution-graph [graphData]="graphData" ></app-pollution-graph>
-		</div>
-	</div>
+	<nav ngbNav #nav="ngbNav" class="nav-tabs" [destroyOnHide]="false">
+		<ng-container ngbNavItem>
+			<a ngbNavLink>Forcasted Pollution</a>
+			<ng-template class="container-fluid" ngbNavContent>
+				<div class="row">
+					<div class="col-lg-3"  *ngFor="let graphData of forcastPollutionGraph">
+						<app-pollution-graph [graphData]="graphData" [darkmode]="darkmode"></app-pollution-graph>
+					</div>
+				</div>
+			</ng-template>
+		</ng-container>
+		<ng-container ngbNavItem>
+			<a ngbNavLink>Historical Pollution</a>
+			<ng-template class="container-fluid" ngbNavContent>
+				<div class="row">
+					<div class="col-lg-3"  *ngFor="let graphData of historicalPollutionGraph">
+						<app-pollution-graph [graphData]="graphData" [darkmode]="darkmode"></app-pollution-graph>
+					</div>
+				</div>
+			</ng-template>
+		</ng-container>
+	</nav>
+	<div [ngbNavOutlet]="nav" class="mt-2"></div>
 </div>
 <div class="container-fluid loading" *ngIf="!currentPollutionData && !forcastPollutionData && !positionData">
 	<h1>Loading</h1>
 </div>
 <footer class="container-fluid">
-	<p><strong>designed & developed by akashdandriyal</strong></p>
+	<p><strong>developed by akashdandriyal</strong></p>
 </footer>

@@ -1,7 +1,17 @@
 header, footer {
-	background-color: rgb(44, 44, 44);
+	background-color: black;
 	color: white;
 	padding: 10px
+}
+
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.detailed-data-container {
+	padding-bottom: 10px;
 }
 
 .loading {
@@ -43,12 +53,21 @@ header, footer {
     color: #e00000;
 }
 
+.dark-mode {
+	background-color: #191a1a;
+	color: white;
+}
+
 .dark-border {
-    border: 1px solid black;
+    border: 1px solid #191a1a;
 }
 
 .light-border {
     border: 1px solid white;
+}
+
+nav {
+	margin-top: 10px
 }
 
 footer {
@@ -57,9 +76,6 @@ footer {
 
 
 @media (max-width: 768px) {
-	header {
-		text-align: center;
-	}
 
 	.pollution-component {
 		flex: 0 0 auto;

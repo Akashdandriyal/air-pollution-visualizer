@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DetailedDataComponent } from './detailed-data/detailed-data.component';
 import { PollutionGraphComponent } from './pollution-graph/pollution-graph.component';
 import { ChartsModule } from 'ng2-charts';
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ChartsModule } from 'ng2-charts';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ChartsModule
+    ChartsModule,
+    NgbNavModule
   ],
   providers: [
     MapService

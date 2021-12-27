@@ -5,22 +5,16 @@
 
         </div>
     </div>
-    <!-- <h1 class="leaflet-top leaflet-left">Yooo</h1> -->
     <div class="map-buttons leaflet-control-container">
-        <!-- <input type="checkbox" name="" id="" (click)="changeMode()"> -->
         <div class="leaflet-bottom leaflet-left">
             <div class="leaflet-control-zoom leaflet-bar leaflet-control">
                 <a role="button" class="leaflet-control-zoom-in" (click)="changeMode()">
                     <span title="Light Mode" *ngIf="darkmode">☀️</span>
                     <span title="Dark Mode" *ngIf="!darkmode">🌙</span>
-                    <!-- <i class="fas fa-sun" *ngIf="darkmode"></i>
-                    <i class="fas fa-moon" *ngIf="!darkmode"></i> -->
                 </a>
                 <a role="button" class="leaflet-control-zoom-in" title="Detect Location" (click)="getLocation()">📍</a>
-                <!-- <input class="form-check-input leaflet-control-zoom-in" type="checkbox" id="flexSwitchCheckDefault" title="Toggle Mode" (click)="changeMode()"> -->
             </div>
         </div>
-        
     </div>
-    <i class="fas fa-sun" *ngIf="darkmode"></i>
+    <p [ngClass]="[darkmode ? 'dark-mode' : 'light-mode']"><strong>developed by akashdandriyal</strong></p>
 </div>

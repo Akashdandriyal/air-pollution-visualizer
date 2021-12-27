@@ -100,8 +100,21 @@ export class MapComponent implements AfterViewInit, OnInit {
           (c: any) => {c.instance.coordinates = coordinates});
         console.log(coordinates);
         this.popup = L.popup({maxWidth: 400, minWidth: 300, maxHeight: 500});
-        this.popup
-        .setContent(markerPopup)
+        this.popup.setContent(markerPopup);
+        const iconRetinaUrl = 'assets/marker-icon-2x.png';
+        const iconUrl = 'assets/marker-icon.png';
+        const shadowUrl = 'assets/marker-shadow.png';
+        const iconDefault = L.icon({
+          iconRetinaUrl,
+          iconUrl,
+          shadowUrl,
+          iconSize: [25, 41],
+          iconAnchor: [12, 41],
+          popupAnchor: [1, -34],
+          tooltipAnchor: [16, -28],
+          shadowSize: [41, 41]
+        });
+        L.Marker.prototype.options.icon = iconDefault;
         let marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(this.map).bindPopup(this.popup).openPopup();
         this.changePopupColor();
       },

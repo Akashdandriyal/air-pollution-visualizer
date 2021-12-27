@@ -2,10 +2,10 @@
     <canvas baseChart width="400" height="300px"
       [datasets]="lineChartData"
       [labels]="lineChartLabels"
-      [options]="lineChartOptions"
+      [options]="darkmode ? chartOptions : lineChartOptions"
       [colors]="lineChartColors"
       [legend]="lineChartLegend"
-      chartType="line"
+      [chartType]="'line'"
       [plugins]="lineChartPlugins">
     </canvas>
 </div>

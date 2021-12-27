@@ -10,7 +10,7 @@ import { Color, Label } from 'ng2-charts';
 export class PollutionGraphComponent implements OnInit {
 
   @Input() graphData: any;
-
+  @Input() darkmode: any;
   public lineChartData: ChartDataSets[] = [];
   public lineChartLabels: Label[] = [];
   public lineChartOptions: any = {
@@ -21,9 +21,12 @@ export class PollutionGraphComponent implements OnInit {
   public lineChartType = 'line';
   public lineChartPlugins = [];
 
+  chartOptions: any;
+
   constructor() { }
 
   ngOnInit(): void {
+    
     this.lineChartData.push(
       { data: this.graphData.data, label: this.graphData.name }
     )
@@ -36,6 +39,23 @@ export class PollutionGraphComponent implements OnInit {
         backgroundColor: this.graphData.color,
       }
     )
+
+    this.chartOptions = {
+      responsive: true,
+      legend: {
+        labels: { fontColor: 'white' }
+      },
+      scales: {
+        xAxes: [ {
+          ticks: { fontColor: 'white' },
+          gridLines: { color: 'rgba(255,255,255,0.2)' }
+        } ],
+        yAxes: [ {
+          ticks: { fontColor: 'white' },
+          gridLines: { color: 'rgba(255,255,255,0.2)' }
+        } ]
+      }
+    };
   }
 
 }
