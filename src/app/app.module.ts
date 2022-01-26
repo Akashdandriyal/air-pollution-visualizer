@@ -12,6 +12,7 @@ import { DetailedDataComponent } from './detailed-data/detailed-data.component';
 import { PollutionGraphComponent } from './pollution-graph/pollution-graph.component';
 import { ChartsModule } from 'ng2-charts';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
     MapComponent,
     MapPopupComponent,
     DetailedDataComponent,
-    PollutionGraphComponent
+    PollutionGraphComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,
