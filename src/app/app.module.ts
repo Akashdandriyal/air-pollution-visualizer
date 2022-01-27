@@ -13,6 +13,7 @@ import { PollutionGraphComponent } from './pollution-graph/pollution-graph.compo
 import { ChartsModule } from 'ng2-charts';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchBarComponent } from './search-bar/search-bar.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
     HttpClientModule,
     BrowserAnimationsModule,
     ChartsModule,
-    NgbNavModule
+    NgbNavModule,
+    FormsModule
   ],
   providers: [
     MapService

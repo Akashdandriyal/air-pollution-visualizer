@@ -1,3 +1,13 @@
-<div>
-    <input type="search" placeholder="search..." (keyup)="handleChange($event)"/>
+<div class="search-bar-container">
+    <div class="search-bar">
+        <span>🔍</span>
+        <input type="search" placeholder="Search" [(ngModel)]="searchText" (keyup)="handleChange($event)" title="Search"/>
+        <span class="search-clear-button" *ngIf="searchText.length > 0" (click)="clearSearchBar()" title="Clear">✖️</span>
+    </div>
+    <div class="search-results" *ngIf="searchResults">
+        <div class="result-item" *ngFor="let result of searchResults.features" (click)="searchedLocation(result)" title={{result.place_name}}>
+            <strong><p>{{result.text}}</p></strong>
+            {{(result.place_name.length > 40) ? (result.place_name | slice:0:20) + '...' : result.place_name}}
+        </div>
+    </div>
 </div>

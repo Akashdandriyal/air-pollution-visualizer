@@ -12,6 +12,7 @@ export class MapComponent implements AfterViewInit, OnInit {
   popup: any;
   darkmode: boolean = false;
   tiles: any;
+  marker: any;
   constructor(
     private resolver: ComponentFactoryResolver,
     private appRef: ApplicationRef,
@@ -57,6 +58,7 @@ export class MapComponent implements AfterViewInit, OnInit {
     .setContent(markerPopup)
     .openOn(map);
     this.changePopupColor();
+    map.flyTo([e.latlng.lat+1.5, e.latlng.lng], 6);
   }
   
   // 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'  
@@ -95,28 +97,7 @@ export class MapComponent implements AfterViewInit, OnInit {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position: any) => {
         console.log(position)
-        let coordinates = L.latLng(position.coords.latitude, position.coords.longitude);
-        let markerPopup: any = this.compileComponent(MapPopupComponent, 
-          (c: any) => {c.instance.coordinates = coordinates});
-        console.log(coordinates);
-        this.popup = L.popup({maxWidth: 400, minWidth: 300, maxHeight: 500});
-        this.popup.setContent(markerPopup);
-        const iconRetinaUrl = 'assets/marker-icon-2x.png';
-        const iconUrl = 'assets/marker-icon.png';
-        const shadowUrl = 'assets/marker-shadow.png';
-        const iconDefault = L.icon({
-          iconRetinaUrl,
-          iconUrl,
-          shadowUrl,
-          iconSize: [25, 41],
-          iconAnchor: [12, 41],
-          popupAnchor: [1, -34],
-          tooltipAnchor: [16, -28],
-          shadowSize: [41, 41]
-        });
-        L.Marker.prototype.options.icon = iconDefault;
-        let marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(this.map).bindPopup(this.popup).openPopup();
-        this.changePopupColor();
+        this.placeMarker(position.coords.latitude, position.coords.longitude)
       },
       (err) => {
         alert("Permission not granted");
@@ -126,6 +107,35 @@ export class MapComponent implements AfterViewInit, OnInit {
     else {
       console.log("Geolocation is not supported by this browser");
     }
+  }
+
+  placeMarker(latitude: number, longitude: number): void {
+    if(this.marker) {
+      this.map.removeLayer(this.marker);
+    }
+    let coordinates = L.latLng(latitude, longitude);
+    let markerPopup: any = this.compileComponent(MapPopupComponent, 
+      (c: any) => {c.instance.coordinates = coordinates});
+    console.log(coordinates);
+    this.popup = L.popup({maxWidth: 400, minWidth: 300, maxHeight: 500});
+    this.popup.setContent(markerPopup);
+    const iconRetinaUrl = 'assets/marker-icon-2x.png';
+    const iconUrl = 'assets/marker-icon.png';
+    const shadowUrl = 'assets/marker-shadow.png';
+    const iconDefault = L.icon({
+      iconRetinaUrl,
+      iconUrl,
+      shadowUrl,
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      tooltipAnchor: [16, -28],
+      shadowSize: [41, 41]
+    });
+    L.Marker.prototype.options.icon = iconDefault;
+    this.marker = L.marker([latitude, longitude]).addTo(this.map).bindPopup(this.popup).openPopup();
+    this.map.flyTo([latitude+2, longitude], 6);
+    this.changePopupColor();
   }
 
   changePopupColor(): void {
@@ -157,6 +167,11 @@ export class MapComponent implements AfterViewInit, OnInit {
         pollutionComponent.style.border = '1px solid white';
       }
     }
+  }
+
+  handleSearchedLocation(e: any): void {
+    console.log(e);
+    this.placeMarker(e.geometry.coordinates[1], e.geometry.coordinates[0]);
   }
 
 }

@@ -1,5 +1,6 @@
 <div class="map-container">
     <h1 [ngClass]="[darkmode ? 'dark-mode' : 'light-mode']">Air Pollution Visualizer</h1>
+    <app-search-bar (locationSelectEvent)="handleSearchedLocation($event)"></app-search-bar>
     <div class="map-frame">
         <div id="map">
 

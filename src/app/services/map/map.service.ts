@@ -37,4 +37,10 @@ export class MapService {
     console.log(data);
     return data;
   }
+
+  getLocations(searchText: string): Observable<Object> {
+    let data = this.http.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${searchText}.json?limit=10&types=postcode%2Caddress%2Cregion%2Cdistrict%2Cneighborhood%2Clocality%2Ccountry%2Cpoi%2Cplace&autocomplete=true&access_token=${environment.mapToken}`)
+    console.log(data);
+    return data;
+  }
 }
