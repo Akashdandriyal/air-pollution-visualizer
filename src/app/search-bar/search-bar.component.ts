@@ -15,17 +15,26 @@ export class SearchBarComponent implements OnInit {
   constructor(private _mapPopupService: MapService) { }
 
   ngOnInit(): void {
+    if(window.screen.width <= 500) {
+      let searchBar = document.getElementsByClassName('search-bar-container')[0] as HTMLElement;
+      searchBar.addEventListener('click', () => {
+        searchBar.style.width = 'calc(100vw - 60px)';
+        searchBar.style.transition = '0.4s linear';
+      });
+    }
   }
 
   handleChange(e: any): void {
     clearTimeout(this.timeout);
-    this.timeout = setTimeout(() => {
-      this._mapPopupService.getLocations(e.target.value).subscribe(
-        responseData => this.searchResults = responseData,
-        responseError => console.log(responseError),
-        () => console.log('Location function executed')
-      );
-    }, 600);
+    if(e.target.value.length > 0) {
+      this.timeout = setTimeout(() => {
+        this._mapPopupService.getLocations(e.target.value).subscribe(
+          responseData => this.searchResults = responseData,
+          responseError => console.log(responseError),
+          () => console.log('Location function executed')
+        );
+      }, 600);
+    }
   }
 
   clearSearchBar(): void {
@@ -39,4 +48,5 @@ export class SearchBarComponent implements OnInit {
     this.locationSelectEvent.emit(location);
     this.searchResults.features.length = 0;
   }
+  
 }
