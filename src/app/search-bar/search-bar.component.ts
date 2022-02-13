@@ -15,13 +15,25 @@ export class SearchBarComponent implements OnInit {
   constructor(private _mapPopupService: MapService) { }
 
   ngOnInit(): void {
-    if(window.screen.width <= 500) {
-      let searchBar = document.getElementsByClassName('search-bar-container')[0] as HTMLElement;
-      searchBar.addEventListener('click', () => {
+    let searchBar = document.getElementsByClassName('search-bar-container')[0] as HTMLElement;
+    const changeSize = () => {
         searchBar.style.width = 'calc(100vw - 60px)';
         searchBar.style.transition = '0.4s linear';
-      });
     }
+    if(window.innerWidth <= 500) {
+      searchBar.addEventListener('click', changeSize);
+    }
+    window.addEventListener('resize', () => {
+      if(window.innerWidth <= 690) {
+        searchBar.style.width = '40px';
+        searchBar.addEventListener('click', changeSize);
+      }
+      else {
+        searchBar.removeEventListener('click', changeSize);
+        searchBar.style.width = '300px';
+        searchBar.style.transition = '0.4s linear';
+      }
+    })
   }
 
   handleChange(e: any): void {
