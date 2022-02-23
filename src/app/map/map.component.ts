@@ -21,19 +21,26 @@ export class MapComponent implements AfterViewInit, OnInit {
 
   ngOnInit(): void {
     let mode = localStorage.getItem('mode');
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
     if(mode == 'true') {
       this.darkmode = true;
     } 
     else if(mode == 'false') {
       this.darkmode = false;
     }
+    else {
+      this.darkmode = systemTheme.matches;
+    }
+    systemTheme.addEventListener('change', event => {
+      this.changeMode(event.matches);
+    });
   }
 
   ngAfterViewInit(): void {
     this.initMap();
   }
 
-   initMap(): void {
+  initMap(): void {
     this.map = L.map('map', {
       center: [ 33.5780, -4.9218 ],
       zoom: 2.5
@@ -63,14 +70,14 @@ export class MapComponent implements AfterViewInit, OnInit {
   
   // 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'  
   // 'https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png'
-  changeMode(){
-    this.darkmode = !this.darkmode;
+  changeMode(mode?: boolean): void{
+    this.darkmode = mode ?? !this.darkmode;
     if(this.darkmode)
       localStorage.setItem('mode', 'true');
     else
       localStorage.setItem('mode', 'false');
-    this.map.removeLayer(this.tiles);
-    this.tiles = L.tileLayer(this.darkmode === false ? `https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=${environment.mapToken}` : `https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{z}/{x}/{y}?access_token=${environment.mapToken}`, {
+      this.map.removeLayer(this.tiles);
+      this.tiles = L.tileLayer(this.darkmode === false ? `https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token=${environment.mapToken}` : `https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{z}/{x}/{y}?access_token=${environment.mapToken}`, {
       maxZoom: 18,
       minZoom: 2
     });
